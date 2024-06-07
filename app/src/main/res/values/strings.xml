@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Republic Services Test</string>
+
+    <string name="drivers_not_found">Drivers Not Found</string>
+    <string name="route_not_found">Route Not Found</string>
+    <string name="route_info">Route Info:</string>
+    <string name="route_id">Id: %1$s</string>
+    <string name="route_name">Name: %1$s</string>
+    <string name="route_type">Type: %1$s</string>
+</resources>
