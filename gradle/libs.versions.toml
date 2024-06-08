@@ -16,6 +16,8 @@ ok_http = "4.12.0"
 hilt-navigation-compose = "1.2.0"
 navVersion = "2.7.7"
 room = "2.6.1"
+mockk = "1.13.10"
+kotlinx-coroutine = "1.8.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -48,6 +50,9 @@ moshi-converter = { module = "com.squareup.retrofit2:converter-moshi", version.r
 moshi-kotlin = { module = "com.squareup.moshi:moshi-kotlin", version.ref = "moshi" }
 moshi-codegen = { module = "com.squareup.moshi:moshi-kotlin-codegen", version.ref = "moshi" }
 hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hilt-navigation-compose" }
+mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
+mockk-android = { module = "io.mockk:mockk-android", version.ref = "mockk" }
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinx-coroutine" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
