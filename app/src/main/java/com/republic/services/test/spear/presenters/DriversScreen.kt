@@ -33,6 +33,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -91,7 +92,7 @@ fun DriversScreen(
             )
         },
     ) {
-        DriversMainContent(it) { driverId -> onDriverClick(driverId) }
+        DriversMainContent(it, viewModel) { driverId -> onDriverClick(driverId) }
     }
 
 }
@@ -100,7 +101,7 @@ fun DriversScreen(
 @Composable
 fun DriversMainContent(
     paddingValues: PaddingValues,
-    viewModel: DriversScreenViewModel = hiltViewModel(),
+    viewModel: DriversScreenViewModel,
     onDriverClick: (driverId: String) -> Unit
 ) {
     val state by viewModel.state.collectAsState()
@@ -126,6 +127,7 @@ fun DriversMainContent(
                         Modifier
                             .pullRefresh(refreshState)
                             .fillMaxSize()
+                            .testTag("Drivers Column Test")
                     ) {
                         items(drivers) {
                             TextButton(onClick = { onDriverClick(it.id) }) {
@@ -136,13 +138,13 @@ fun DriversMainContent(
                 }
 
                 loading -> {
-                    Box(modifier = Modifier.fillMaxSize(), Alignment.Center) {
+                    Box(modifier = Modifier.fillMaxSize().testTag("Drivers Loading Test"), Alignment.Center) {
                         CircularProgressIndicator()
                     }
                 }
 
                 else -> {
-                    Box(modifier = Modifier.fillMaxSize(), Alignment.Center) {
+                    Box(modifier = Modifier.fillMaxSize().testTag("Drivers Error Test"), Alignment.Center) {
                         Text(stringResource(id = R.string.drivers_not_found))
                     }
                 }
