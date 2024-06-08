@@ -7,4 +7,5 @@
     <string name="route_id">Id: %1$s</string>
     <string name="route_name">Name: %1$s</string>
     <string name="route_type">Type: %1$s</string>
+    <string name="drivers">Drivers</string>
 </resources>

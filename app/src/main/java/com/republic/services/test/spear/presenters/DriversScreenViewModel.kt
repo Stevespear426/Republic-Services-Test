@@ -3,6 +3,7 @@ package com.republic.services.test.spear.presenters
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.republic.services.test.spear.models.Driver
+import com.republic.services.test.spear.models.DriverEntity
 import com.republic.services.test.spear.repositories.DataRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -15,6 +16,12 @@ import javax.inject.Inject
 class DriversScreenViewModel @Inject constructor(
     private val dataRepository: DataRepository
 ) : ViewModel() {
+
+    fun refreshData() {
+        viewModelScope.launch(Dispatchers.IO) {
+            dataRepository.fetchData()
+        }
+    }
 
 
     private val _state: MutableStateFlow<DriversPageState> =
@@ -31,5 +38,5 @@ class DriversScreenViewModel @Inject constructor(
 
 data class DriversPageState(
     val loading: Boolean = false,
-    val drivers: List<Driver> = emptyList()
+    val drivers: List<DriverEntity> = emptyList()
 )

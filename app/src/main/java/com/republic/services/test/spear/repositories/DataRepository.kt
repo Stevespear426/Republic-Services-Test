@@ -1,22 +1,33 @@
 package com.republic.services.test.spear.repositories
 
 import com.republic.services.test.spear.models.Driver
+import com.republic.services.test.spear.models.DriverEntity
 import com.republic.services.test.spear.models.Route
+import com.republic.services.test.spear.repositories.local.AppDatabase
 import com.republic.services.test.spear.repositories.remote.ApiService
 import javax.inject.Inject
 
 class DataRepository @Inject constructor(
-    private val apiService: ApiService
+    private val apiService: ApiService,
+    private val db: AppDatabase
 ) {
 
-    suspend fun getDrivers(): List<Driver> {
-        val response = apiService.getData()
-        return response.drivers
+    suspend fun getDrivers(): List<DriverEntity> {
+        val drivers = db.driverDao().getDriversASC()
+        if (drivers.isNotEmpty()) return drivers
+        fetchData()
+        return db.driverDao().getDriversASC()
     }
 
     suspend fun getRoutes(): List<Route> {
-        val response = apiService.getData()
-        return response.routes
+        val routes = db.routeDao().getRoutes()
+        if (routes.isNotEmpty()) return routes
+        fetchData()
+        return db.routeDao().getRoutes()
     }
 
+    suspend fun fetchData() {
+        val response = apiService.getData()
+        db.insertResponse(response)
+    }
 }
