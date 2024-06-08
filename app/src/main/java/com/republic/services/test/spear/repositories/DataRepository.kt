@@ -12,11 +12,18 @@ class DataRepository @Inject constructor(
     private val db: AppDatabase
 ) {
 
-    suspend fun getDrivers(): List<DriverEntity> {
+    suspend fun getDriversASC(): List<DriverEntity> {
         val drivers = db.driverDao().getDriversASC()
         if (drivers.isNotEmpty()) return drivers
         fetchData()
         return db.driverDao().getDriversASC()
+    }
+
+    suspend fun getDriversDESC(): List<DriverEntity> {
+        val drivers = db.driverDao().getDriversDESC()
+        if (drivers.isNotEmpty()) return drivers
+        fetchData()
+        return db.driverDao().getDriversDESC()
     }
 
     suspend fun getRoutes(): List<Route> {
